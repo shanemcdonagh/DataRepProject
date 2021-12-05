@@ -1,14 +1,36 @@
 import React, { Component } from 'react';
+import PlantsItem from './plants-item';
+import axios from 'axios';
 
 // Class Home - Extends Component class
 class Plants extends Component {
 
+    
+    state = {
+        plants: []
+    };
+
+    // Called everytime component becomes active in view
+    componentDidMount(){
+        // Promise - Result of an asynchronous operation
+        // Axios - Promise based HTTP client
+        axios.get('http://localhost:4000/plants')
+        .then((response) => {
+            this.setState({plants: response.data})
+        })
+        .catch((error) =>{
+            console.log("Bruh");
+        })
+
+    }
+   
+   
     // Method - This contains the visual content of the component
     render() {
-        return (
-        <div id="plants">
-            <h1>Code goes here...</h1>  
-        </div>);
+        // Map - Breaks up collection into individual items
+        return this.state.plants.map((plant) =>{
+            return <PlantsItem plant={plant}></PlantsItem>
+        })
     }
 }
 

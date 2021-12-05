@@ -7,11 +7,7 @@ class Home extends Component {
 
     // Method - This contains the visual content of the component
     render() {
-        return (<div id="home">
-
-            {/* Used the website https://www.fontspace.com/category/plants for the writing for the header */}
-            <a href="https://www.fontspace.com/category/leaves"><img src="https://see.fontimg.com/api/renderfont4/8MOZ2/eyJyIjoiZnMiLCJoIjo4MSwidyI6MTI1MCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/UGxhbnQgQnVkZHkg/thefotosintesis-hollow.png" alt="Leaves fonts"></img></a>
-
+        return (<div>
             {/* Bootstrap Carousel - Looping over images */}
             <Carousel>
                 <Carousel.Item interval={900}>
