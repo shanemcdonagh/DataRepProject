@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Home from './components/home'
-import Plants from './components/plants'
+import ReadPlants from './components/read-plants';
 import MyPlants from './components/my-plants'
 import AddPlant from './components/add-plant';
 
@@ -12,7 +12,8 @@ import {Navbar, Nav} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
-import {BrowserRouter as Router,Routes,Route,Link} from "react-router-dom";    
+import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";    
+import ReadMyPlants from './components/read-my-plants';
 
 class App extends Component {
   render() {
@@ -26,22 +27,19 @@ class App extends Component {
             <Navbar expand="lg" variant="light" bg="light" fixed="bottom">
               <Container>
                 <Button variant="outline-success" href="/">Home</Button>
-                <Button variant="outline-success" href="/plants">Plants</Button>
-                <Button variant="outline-success" href="/my-plants">My Plants</Button>
+                <Button variant="outline-success" href="/read-plants">Plants</Button>
+                <Button variant="outline-success" href="/read-my-plants">My Plants</Button>
                 <Button variant="outline-success" href="/add-plant">Add Plant</Button>
-
               </Container>
             </Navbar>
           </Container>
-
-          {/* When a call is made to a specific path, the corresponding component will be swapped in */}
-           {/* Had problem with Switch here, due to differing versions of React Router, solved with: https://reactrouter.com/docs/en/v6/upgrading/v5 */}
-          <Routes>
-            <Route path="/" element={<Home />}/>
-            <Route path="/plants" element={<Plants />}/>
-            <Route path="/my-plants" element={<MyPlants />}/>
-            <Route path = "/add-plant" element = {<AddPlant />}/>
-          </Routes>
+           {/* Switches between the local components */}
+           <Switch>
+            <Route path="/" exact><Home /></Route>
+            <Route path="/read-plants"><ReadPlants /></Route>
+            <Route path="/read-my-plants" ><ReadMyPlants /></Route>
+            <Route path="/add-plant" ><AddPlant /></Route>
+          </Switch>
         </div>
       </Router>
     );

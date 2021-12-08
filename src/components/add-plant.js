@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
 
 // Class Home - Extends Component class
 class AddPlant extends Component {
@@ -24,7 +25,7 @@ class AddPlant extends Component {
             type: '',
             exposure: '',
             image: '',
-            waterOn: '',
+            waterOn: 'Monday', // Default is Monday
         }
     }
 
@@ -48,11 +49,11 @@ class AddPlant extends Component {
 
         // Send a POST request to the following path alongside new plant
         axios.post("http://localhost:4000/my-plants", newPlant)
-        .then((res)=>{
-            console.log(res.status(200))
+        .then((response)=>{
+            console.log(response)
         })
-        .catch((err) =>{
-            console.log(err.status(500));
+        .catch((error) =>{
+            console.log(error);
         });
     }
 
@@ -95,7 +96,7 @@ class AddPlant extends Component {
                         <input type="text"
                             className="form-control"
                             value={this.state.name}
-                            onChange={this.changeName} //Update movie title value
+                            onChange={this.changeName} //Update name value
                         />
                     </div>
 
@@ -106,8 +107,8 @@ class AddPlant extends Component {
                         {/* Input box */}
                         <input type="text"
                             className="form-control"
-                            value={this.state.type} // Value of text box points to "Year"
-                            onChange={this.changeType} //Update movie year value
+                            value={this.state.type} // Value of text box points to "Type"
+                            onChange={this.changeType} //Update type value
                         />
                     </div>
 
@@ -118,8 +119,19 @@ class AddPlant extends Component {
                         {/* Input box */}
                         <input type="text"
                             className="form-control"
-                            value={this.state.exposure} // Value of text box points to "Poster"
-                            onChange={this.changeExposure} //Update movie poster url value
+                            value={this.state.exposure} // Value of text box points to "Exposure"
+                            onChange={this.changeExposure} //Update exposure value
+                        />
+                    </div>
+                     {/* Image */}
+                     <div className="form-group">
+                        <label>Image: </label>
+
+                        {/* Input box */}
+                        <input type="text"
+                            className="form-control"
+                            value={this.state.image} // Value of text box points to "Image"
+                            onChange={this.changeImage} //Update image value
                         />
                     </div>
                     <div className="form-group">

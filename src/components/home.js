@@ -5,6 +5,26 @@ import '../styling/home.css';
 // Class Home - Extends Component class
 class Home extends Component {
 
+
+    // // Object designed to hold data within a class
+    // state = {
+    //     plants: []
+    // };
+
+    // // Method - Method gets called whenever component becomes visible (inserted into DOM)
+    // componentDidMount() {
+    //     // Retrieve data from the server and...
+    //     axios.get("http://localhost:4000/api/movies")
+    //         .then((response) => {
+    //             // pass it to the movies array
+    //             this.setState({ myMovies: response.data })
+    //         })
+    //         .catch((error) => {
+    //             // Else, output error to console
+    //             console.log(error);
+    //         });
+    // }
+
     // Method - This contains the visual content of the component
     render() {
         return (<div>
@@ -33,7 +53,8 @@ class Home extends Component {
                 </Carousel.Item>
             </Carousel>
 
-            
+
+
             {/* <h2>Your go-to buddy to keep your plants nice and refreshed!</h2> */}
         </div>);
     }

@@ -50,12 +50,11 @@ var userPlantSchema = new mongoose.Schema({
     exposure: String,
     image: String,
     waterOn: String
-
 });
 
 // Using the schemas to create models
 var currPlantModel = mongoose.model("plants", currPlantSchema)
-var userPlantModel = mongoose.model("userlants", userPlantSchema)
+var userPlantModel = mongoose.model("userplants", userPlantSchema)
 
  // Listens for a GET request to the following path
 app.get('/plants', (req,res) => {
@@ -65,6 +64,8 @@ app.get('/plants', (req,res) => {
        // Responds to request with JSON data
        res.json(data);
    })
+   .then((data)=>{res.status(200).send('Data successfully retrieved from server')})
+   .catch((err) =>{res.status(500).send('Error: ' + err)})
 });
 
  // Listens for a GET request to the following path
@@ -75,11 +76,24 @@ app.get('/my-plants', (req,res) => {
         // Responds to request with JSON data
         res.json(data);
     })
+    .then((data)=>{res.status(200).send('Data successfully retrieved from server')})
+    .catch((err) =>{res.status(500).send('Error: ' + err)})
  });
 
+ // Returns record from the database based on its id and sends a JSON response to the client
+app.get('/my-plants/:id', (req, res) => {
+    console.log(req.params.id);
+
+    userPlantModel.findById(req.params.id, (err, data) => {
+        res.json(data);
+    })
+    .then((data)=>{res.status(200).send('Data successfully retrieved from server')})
+    .catch((err) =>{res.status(500).send('Error: ' + err)})
+})
+
  // Listens for a POST request to the following path
-app.post('/plants',(req,res) =>{
-    console.log("Plant received " + req.body.name + " " + req.body.type + " " + req.body.exposure + " " + req.body.image + " " + req.body.waterOn)
+app.post('/my-plants',(req,res) =>{
+    console.log("Plant received:  " + req.body.name + " " + req.body.type + " " + req.body.exposure + " " + req.body.waterOn)
 
     // Creates a new document based on defined schema to defined collectionb
     userPlantModel.create({
@@ -89,9 +103,26 @@ app.post('/plants',(req,res) =>{
         image: req.body.image,
         waterOn: req.body.waterOn,
     })
+    .then((data)=>{res.status(200).send('Data successfully sent to the server')})
+    .catch(res.status(500).send('Error encountered'))
 
     // Sends confirmation of item added to the request
-    res.status(200).send({message: "Item added"});
+    res.send("Plant added");
+})
+
+// Listens for DELETE request passed to this url
+app.delete('/my-plants/:id', (req, res) => {
+    console.log("Deleting: " + req.params.id);
+
+    // Deletes plant document from collection in MongoDB
+    userPlantModel.deleteOne({ _id: req.params.id }, (error, data) => {
+        if (error) {
+            res.send('Resource could not be found: ' + error);
+        }
+        else {
+            res.send('Resource succesfully deleted: ' + data);
+        }
+    });
 })
 
 // Server listening through port 4000 - Accessed by localhost:3000 (our app)
