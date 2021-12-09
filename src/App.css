@@ -2,15 +2,8 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+img{
+  padding-bottom: 30px  ;
 }
 
 .App-header {
@@ -35,4 +28,18 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Adding font to be used */
+/* https://www.w3schools.com/css/css3_fonts.asp */
+@font-face {
+  font-family: font;
+  src: url(./styling/font.ttf);
+}
+input{
+  text-align: center;
+}
+
+div {
+  font-family: font;
 }

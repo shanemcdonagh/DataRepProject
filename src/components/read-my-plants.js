@@ -45,7 +45,7 @@ class ReadMyPlants extends Component {
         // Object designed to hold data within a class
         state = {
             plants: []
-        };z
+        };
 
     // Method - Visual aspect of component
     render() {
