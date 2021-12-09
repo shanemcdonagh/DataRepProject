@@ -43,3 +43,9 @@ input{
 div {
   font-family: font;
 }
+
+.errorDiv {
+  justify-content: center;
+  text-align: center;
+  margin-top: 200px;
+}

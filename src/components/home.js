@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import { Nav } from 'react-bootstrap';
-import { Tabs } from 'react-bootstrap/Tabs'
 import '../styling/home.css';
 
 // Class Home - Extends Component class
@@ -44,24 +42,9 @@ class Home extends Component {
                 </div>
                 <div>
                     <h2>It is {weekday}, time to water:</h2>
+                    {/* <ReadWaterPlants></ReadWaterPlants> */}
                 </div>      
             </div>
-
-            {/* <ReadWaterPlants></ReadWaterPlants> */}
-
-            {/* <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
-                <Tab eventKey="home" title="Home">
-                    <Sonnet />
-                </Tab>
-                <Tab eventKey="profile" title="Profile">
-                    <Sonnet />
-                </Tab>
-                <Tab eventKey="contact" title="Contact" disabled>
-                    <Sonnet />
-                </Tab>
-            </Tabs> */}
-
-            {/* <h2>Your go-to buddy to keep your plants nice and refreshed!</h2> */}
         </div>);
     }
 }

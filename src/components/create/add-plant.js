@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import '../styling/addplant.css'
+import '../../styling/addplant.css'
 
-// Class Home - Extends Component class
-class EditPlant extends Component {
+// Class Home - Extends Component sclass
+class AddPlant extends Component {
 
     // Initialises state initially to empty
     constructor() {
@@ -21,7 +21,6 @@ class EditPlant extends Component {
 
         // Initialise state to empty 
         this.state = {
-            _id: '',
             name: '',
             type: '',
             exposure: '',
@@ -30,37 +29,17 @@ class EditPlant extends Component {
         }
     }
 
-    // Called when component is loaded
-    componentDidMount(){
-
-        axios.get('http://localhost:4000/my-plants/' + this.props.match.params.id)
-        .then((response)=> {
-            
-            // Update values of the current state from the retrieved document values
-            this.setState({
-                _id:response.data._id,
-                name:response.data.name,
-                type:response.data.type,
-                exposure:response.data.exposure,
-                image:response.data.image,
-                waterOn:response.data.waterOn
-            })
-        })
-        .catch((error)=>{console.log(error);})
-    }
-
     // Method - Invoked when form has been submitted
     submit(event) {
 
         // Alert onscreen of insert (test)
-        alert("Updated plant, passing to database " + this.state.name);
+        alert("Added plant to database " + this.state.name);
 
         // Prevent page refresh
         event.preventDefault();
 
         // Create new instance of a plant based on values set in form
-        const updatedPlant = {
-            _id: this.state._id,
+        const newPlant = {
             name: this.state.name,
             type: this.state.type,
             exposure: this.state.exposure,
@@ -69,7 +48,7 @@ class EditPlant extends Component {
         }
 
         // Send a POST request to the following path alongside new plant
-        axios.put("http://localhost:4000/my-plants/"+this.state._id, updatedPlant)
+        axios.post("http://localhost:4000/my-plants", newPlant)
         .then((response)=>{
             console.log(response)
         })
@@ -173,7 +152,7 @@ class EditPlant extends Component {
                     <div>
                         <br></br>
                         {/* Button to submit movie */}
-                        <input type="submit" value="Update" className="btn btn-success"></input>
+                        <input type="submit" value="Add Plant" className="btn btn-success"></input>
                     </div>
                 </form>
             </div>);
@@ -181,4 +160,4 @@ class EditPlant extends Component {
 }
 
 // Export Home class to use in App.js
-export default EditPlant;
+export default AddPlant;

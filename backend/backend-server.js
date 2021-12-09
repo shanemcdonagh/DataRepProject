@@ -7,6 +7,11 @@ const cors = require('cors');
 // Allows us to connect to a MongoDB database
 const mongoose = require('mongoose');
 
+// Serves the static files from the React app
+// const path = require('path');
+// app.use(express.static(path.join(__dirname, '../build')));
+// app.use('/static', express.static(path.join(__dirname, 'build//static')));
+
 app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()) // parse application/json
 
@@ -56,74 +61,74 @@ var userPlantSchema = new mongoose.Schema({
 var currPlantModel = mongoose.model("plants", currPlantSchema)
 var userPlantModel = mongoose.model("userplants", userPlantSchema)
 
- // Listens for a GET request to the following path
- app.get('/today', (req,res) => {
+// Listens for a GET request to the following path
+app.get('/today', (req, res) => {
 
-     // Retrieves the day of the week and converts to a String
-     var date = new Date();
-     var weekday = date.toLocaleString("default", { weekday: "long" })
+    // Retrieves the day of the week and converts to a String
+    var date = new Date();
+    var weekday = date.toLocaleString("default", { weekday: "long" })
 
     // Retrieve plants that need watering on this day
-    userPlantModel.find({waterOn:{weekday}},(err,data)=>{
+    userPlantModel.find({ waterOn: { weekday } }, (err, data) => {
         res.status(200).json(data);
     })
- });
-
-
- // Listens for a GET request to the following path
-app.get('/plants', (req,res) => {
-
-   // Return all documents within this collection (plants) based on defined schemas
-   currPlantModel.find((err,data) => {
-       // Responds to request with JSON data
-       res.status(200).json(data);
-   })
-   //.then((data)=>{res.status(200).json(data)})
-   //.catch((err) =>{res.status(500).send('Error: ' + err)})
 });
 
- // Listens for a GET request to the following path
-app.get('/my-plants', (req,res) => {
 
-    // Return all documents within this collection (my-plants) based on defined schemas
-    userPlantModel.find((err,data) => {
+// Listens for a GET request to the following path
+app.get('/plants', (req, res) => {
+
+    // Return all documents within this collection (plants) based on defined schemas
+    currPlantModel.find((err, data) => {
         // Responds to request with JSON data
         res.status(200).json(data);
     })
-   // .then((data)=>{console.log("Data succesfully retrieved: " + data)})
-   // .catch((err) =>{res.status(500).send('Error: ' + err)})
- });
+    //.then((data)=>{res.status(200).json(data)})
+    //.catch((err) =>{res.status(500).send('Error: ' + err)})
+});
 
- // Returns record from the database based on its id and sends a JSON response to the client
+// Listens for a GET request to the following path
+app.get('/my-plants', (req, res) => {
+
+    // Return all documents within this collection (my-plants) based on defined schemas
+    userPlantModel.find((err, data) => {
+        // Responds to request with JSON data
+        res.status(200).json(data);
+    })
+    // .then((data)=>{console.log("Data succesfully retrieved: " + data)})
+    // .catch((err) =>{res.status(500).send('Error: ' + err)})
+});
+
+// Returns record from the database based on its id and sends a JSON response to the client
 app.get('/my-plants/:id', (req, res) => {
     console.log(req.params.id);
 
     userPlantModel.findById(req.params.id, (err, data) => {
         res.json(data);
     })
-  //  .then((data)=>{console.log("Data succesfully retrieved: " + data)})
-  //  .catch((err) =>{res.status(500).send('Error: ' + err)})
+    //  .then((data)=>{console.log("Data succesfully retrieved: " + data)})
+    //  .catch((err) =>{res.status(500).send('Error: ' + err)})
 })
 
-app.put('/my-plants/:id', (req,res) => {
+app.put('/my-plants/:id', (req, res) => {
     console.log("Plant updated: " + req.params.id);
 
     // Find the document within the userplants collection and updates it
-    userPlantModel.findByIdAndUpdate(req.params.id, req.body,{new:true},
-        (error,data)=>{
+    userPlantModel.findByIdAndUpdate(req.params.id, req.body, { new: true },
+        (error, data) => {
             // If an error was encountered
             if (error) {
-                res.status(200).send("Unexpected error: " +error);
+                res.status(200).send("Unexpected error: " + error);
             }
             else {
-                res.status(200).send("Resource successfully updated: " +data);
+                res.status(200).send("Resource successfully updated: " + data);
             }
-           
+
         })
 })
 
- // Listens for a POST request to the following path
-app.post('/my-plants',(req,res) =>{
+// Listens for a POST request to the following path
+app.post('/my-plants', (req, res) => {
     console.log("Plant received:  " + "Name: " + req.body.name + " | Type: " + req.body.type + " | Exposure: " + req.body.exposure + " | Water On: " + req.body.waterOn)
 
     // Creates a new document based on defined schema to defined collectionb
@@ -135,7 +140,7 @@ app.post('/my-plants',(req,res) =>{
         waterOn: req.body.waterOn,
     })
     //.then((data)=>{res.status(201).send('Data successfully sent to the server')})
-   // .catch(res.status(500).send('Error encountered'))
+    // .catch(res.status(500).send('Error encountered'))
 
 })
 
@@ -158,3 +163,8 @@ app.delete('/my-plants/:id', (req, res) => {
 app.listen(port, (req, res) => {
     console.log(`Listening at http://localhost:${port}`);
 });
+
+// // Handles GET requests to any other urls and sends it to index.html
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname + '/../build/index.html'));
+// });

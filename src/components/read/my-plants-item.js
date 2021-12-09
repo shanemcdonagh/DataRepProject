@@ -4,17 +4,18 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import '../styling/plants-item.css';
+import "../../styling/plants-item.css"
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 // Class Home - Extends Component class
 class MyPlantsItem extends Component {
-
+    count;
 
     constructor() {
         // Invoke the parent constructor
         super();
+
+      this.count  = 0;
 
         // Binds the function call to 'this.DeletePlant', to be accessed as an event handler
         this.DeletePlant = this.DeletePlant.bind(this);
@@ -36,11 +37,6 @@ class MyPlantsItem extends Component {
 
     // Method - This contains the visual content of the component
     render() {
-
-        if (this.props.count == 0) {
-            return (<div><h1>No plants have been added yet!</h1></div>)
-        }
-        else {
             return (
                 <div>
                     {/* Props - Accesses data passed as a property to current component */}
@@ -75,15 +71,10 @@ class MyPlantsItem extends Component {
                         </Row>
                         <hr />
                     </Container>
-                    {/* Displays the edit component alongside the specific movie
-                    <div>
-                     <Link to="/add-plant" size='lg' className="btn btn-primary">Add</Link>
-                     </div> */}
                 </div>
             );
         }
     }
-}
 
 // Export Home class to use in App.js
 export default MyPlantsItem;

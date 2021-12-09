@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Home from './components/home'
-import ReadPlants from './components/read-plants';
-import AddPlant from './components/add-plant';
-import EditPlant from './components/edit-plant';
+import ReadPlants from './components/read/read-plants';
+import AddPlant from './components/create/add-plant';
+import EditPlant from './components/update/edit-plant';
 
 // Bootstrap - Used to provide CSS styling to Bootstrap components
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,9 +12,8 @@ import { Navbar} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import ReadMyPlants from './components/read-my-plants';
-import Tabs from 'react-bootstrap/Tabs';
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import ReadMyPlants from './components/read/read-my-plants';
 
 class App extends Component {
   render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import WaterOn from './water';
+import WaterOn from '../water';
 import '../styling/plants-item.css';
 
 
@@ -17,8 +17,9 @@ class ReadWaterPlants extends Component {
         // Retrieve data from the server and...
         axios.get("http://localhost:4000/today")
             .then((response) => {
-                // pass it to the movies array
+                // pass it to the plants array
                 this.setState({ plants: response.data })
+                console.log(this.state.plants)
             })
             .catch((error) => {
                 // Else, output error to console
@@ -30,7 +31,7 @@ class ReadWaterPlants extends Component {
     render() {
         return (
             <div>
-                {/* Displaying and passing data from state object to the Movie component */}
+                {/* Displaying and passing data from state object to the Water component */}
                 <WaterOn plants={this.state.plants}></WaterOn>
             </div>
         );

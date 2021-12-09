@@ -3,10 +3,9 @@ import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import '../styling/plants-item.css';
+import '../../styling/plants-item.css';
 
 
 // Class Home - Extends Component class
@@ -47,7 +46,9 @@ class PlantsItem extends Component {
     }
 
     changeDay(event) {
-        this.state.waterOn = event.target.value;
+        this.setState({
+            waterOn: event.target.value
+        })
     }
 
     // Method - This contains the visual content of the component

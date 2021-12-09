@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import '../styling/water-item.css';
+import '../../styling/water-item.css';
 
 
 // Class Home - Extends Component class
