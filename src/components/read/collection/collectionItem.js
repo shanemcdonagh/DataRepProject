@@ -5,11 +5,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import '../../styling/plants-item.css';
 
 
 // Class Home - Extends Component class
-class PlantsItem extends Component {
+class CollectionItem extends Component {
 
     constructor() {
 
@@ -56,15 +55,15 @@ class PlantsItem extends Component {
         return (
             <div>
                 {/* Props - Accesses data passed as a property to current component */}
-                <Container>
+                <Container className='contains'>
                     <hr />
                     <Row className="row">
                         <Col>
-                            <Image src={this.props.plant.image} width="100px" rounded="true" />
+                            <Image className='thumbnails' src={this.props.plant.image} thumbnail/>
                         </Col>
                         <Col>
                             <p>Name</p>
-                            <h2>{this.props.plant.name}</h2>
+                            <h3>{this.props.plant.name}</h3>
                         </Col>
                         <Col>
                             <p>Type</p>
@@ -97,4 +96,4 @@ class PlantsItem extends Component {
 }
 
 // Export Home class to use in App.js
-export default PlantsItem;
+export default CollectionItem;

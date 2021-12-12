@@ -9,13 +9,10 @@ import axios from 'axios';
 
 // Class Home - Extends Component class
 class MyPlantsItem extends Component {
-    count;
 
     constructor() {
         // Invoke the parent constructor
         super();
-
-      this.count  = 0;
 
         // Binds the function call to 'this.DeletePlant', to be accessed as an event handler
         this.DeletePlant = this.DeletePlant.bind(this);
@@ -40,15 +37,15 @@ class MyPlantsItem extends Component {
             return (
                 <div>
                     {/* Props - Accesses data passed as a property to current component */}
-                    <Container>
+                    <Container className='container'>
                         <hr />
                         <Row className="row">
                             <Col>
-                                <Image src={this.props.plant.image} width="100px" rounded="true" />
+                                <Image className='thumbnails' src={this.props.plant.image} thumbnail/>
                             </Col>
                             <Col>
                                 <p>Name</p>
-                                <h2>{this.props.plant.name}</h2>
+                                <h3>{this.props.plant.name}</h3>
                             </Col>
                             <Col>
                                 <p>Type</p>
@@ -63,10 +60,8 @@ class MyPlantsItem extends Component {
                                 <h3>{this.props.plant.waterOn}</h3>
                             </Col>
                             <Col>
-                                <Button variant="success" href={"/edit-plant/"+this.props.plant._id}>Edit</Button>
-                            </Col>
-                            <Col>
-                                <Button variant="success" onClick={() => { this.DeletePlant() }}>Delete</Button>
+                                <Button className="plantButton" variant="success" href={"/edit-plant/"+this.props.plant._id}>Edit</Button>
+                                <Button className="plantButton" variant="success" onClick={() => { this.DeletePlant() }}>Delete</Button>
                             </Col>
                         </Row>
                         <hr />

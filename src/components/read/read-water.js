@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import WaterOn from '../water';
-import '../styling/plants-item.css';
+import WaterOn from './water';
+import '../../styling/plants-item.css';
 
 
 // Class Home - Extends Component class
@@ -29,9 +29,15 @@ class ReadWaterPlants extends Component {
 
     // Method - This contains the visual content of the component
     render() {
+
+         // Retrieves the day of the week and converts to a String
+         var date = new Date();
+         var weekday = date.toLocaleString("default", { weekday: "long" })
+ 
         return (
             <div>
                 {/* Displaying and passing data from state object to the Water component */}
+                <h2>It is {weekday}, time to water:</h2>
                 <WaterOn plants={this.state.plants}></WaterOn>
             </div>
         );

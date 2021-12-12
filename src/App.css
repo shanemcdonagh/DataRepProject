@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-img{
+.logo{
   padding-bottom: 30px  ;
 }
 
@@ -40,12 +40,38 @@ input{
   text-align: center;
 }
 
+/* Used to specify the font to be used by the website */
 div {
   font-family: font;
 }
 
-.errorDiv {
+/* Used for spacing of the contents displayed from the "no-plants" component */
+.noPlants {
   justify-content: center;
   text-align: center;
   margin-top: 200px;
+}
+
+.waterList{
+  height: 500px;
+  overflow: auto;
+  align-content: center;
+  padding: 5%;  
+}
+
+/* Used to specify size of images for plants */
+.thumbnails{
+  height: 160px;
+  width: 120px;
+}
+
+/* Used to add spacing between the buttons on the "My Plants" page */
+.plantButton{
+ margin-left: 5px;
+}
+
+.noneToWater{
+  padding:50px;
+  margin-left: 20px;
+  margin-top: 20px;
 }

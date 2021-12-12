@@ -2,11 +2,12 @@
 /* Had issues with the size of the carousel, 
 solution: https://stackoverflow.com/questions/28589911/bootstrap-change-carousel-height  */
 .carousel .carousel-item {
-    height: 500px;  
+    height: 500px;
+    width: 500px;  
   }
   
   .carousel {
-      width:500px;
+      width:500px;   
   }
 
   img{
@@ -21,6 +22,11 @@ solution: https://stackoverflow.com/questions/28589911/bootstrap-change-carousel
       min-height: 500px;
   }
 
-    .contain{
+    .homeItems{
         display: flex;
+    }
+
+    .borderLine{
+        border-right: 6px solid green;
+        margin-left: 190px;
     }

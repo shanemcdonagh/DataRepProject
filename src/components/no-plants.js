@@ -6,7 +6,7 @@ class Test extends Component {
 
     render() {
        return(
-       <div className='errorDiv'>
+       <div className='noPlants'>
         <h1>No plants have been added!</h1>
         <Button variant="success" href="/add-plant">Add a Plant</Button>
        </div>)

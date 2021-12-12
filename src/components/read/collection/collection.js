@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import PlantsItem from './plants-item';
+import PlantsItem from './collectionItem';
 
 // Class Home - Extends Component class
-class Plants extends Component {
+class Collection extends Component {
 
     render() {
         // Props - Used to access information passed from parent component
@@ -14,4 +14,4 @@ class Plants extends Component {
 }
 
 // Export Home class to use in App.js
-export default Plants;
+export default Collection;

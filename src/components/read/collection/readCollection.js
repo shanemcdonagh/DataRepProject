@@ -1,16 +1,16 @@
 // Imports
 import React, { Component } from 'react';
-import Plants from './plants';
+import Collection from './collection';
 import axios from 'axios';
 
 // Class Read - extends Component class
-class ReadPlants extends Component {
+class readCollection extends Component {
 
     // Called everytime component becomes active in view
     componentDidMount() {
         // Promise - Result of an asynchronous operation
         // Axios - Promise based HTTP client
-        axios.get('http://localhost:4000/plants')
+        axios.get('http://localhost:4000/collection')
             .then((response) => {
                 this.setState({ plants: response.data })
             })
@@ -31,7 +31,7 @@ class ReadPlants extends Component {
         return (
             <div>
                 {/* Displaying and passing data from state object to the Movie component */}
-                <Plants plants={this.state.plants}></Plants>
+                <Collection plants={this.state.plants}></Collection>
             </div>
         );
     }
@@ -39,4 +39,4 @@ class ReadPlants extends Component {
 }
 
 // Export component for use elsewhere
-export default ReadPlants;
+export default readCollection;

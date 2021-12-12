@@ -69,14 +69,14 @@ app.get('/today', (req, res) => {
     var weekday = date.toLocaleString("default", { weekday: "long" })
 
     // Retrieve plants that need watering on this day
-    userPlantModel.find({ waterOn: { weekday } }, (err, data) => {
+    userPlantModel.find({ waterOn: weekday }, (err, data) => {
         res.status(200).json(data);
     })
 });
 
 
 // Listens for a GET request to the following path
-app.get('/plants', (req, res) => {
+app.get('/collection', (req, res) => {
 
     // Return all documents within this collection (plants) based on defined schemas
     currPlantModel.find((err, data) => {
