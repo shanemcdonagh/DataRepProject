@@ -1,13 +1,13 @@
+// Imports (React, Component, Axios and Local Component)
 import React, { Component } from 'react';
 import axios from 'axios';
-import WaterOn from './water';
-import '../../styling/plants-item.css';
+import ToWater from './toWater';
 
 
-// Class Home - Extends Component class
-class ReadWaterPlants extends Component {
+// Class ReadToWater - Extends Component class
+class ReadToWater extends Component {
 
-    // // Object designed to hold data within a class
+    // Object designed to hold data within a class
     state = {
         plants: []
     };
@@ -19,7 +19,6 @@ class ReadWaterPlants extends Component {
             .then((response) => {
                 // pass it to the plants array
                 this.setState({ plants: response.data })
-                console.log(this.state.plants)
             })
             .catch((error) => {
                 // Else, output error to console
@@ -31,18 +30,19 @@ class ReadWaterPlants extends Component {
     render() {
 
          // Retrieves the day of the week and converts to a String
+         // REF: https://coderrocketfuel.com/article/get-the-name-of-the-current-weekday-in-vanilla-javascript
          var date = new Date();
          var weekday = date.toLocaleString("default", { weekday: "long" })
  
         return (
-            <div>
-                {/* Displaying and passing data from state object to the Water component */}
+            <div className='readToWater'>
+                {/* Displaying and passing data from state object to the ToWater component */}
                 <h2>It is {weekday}, time to water:</h2>
-                <WaterOn plants={this.state.plants}></WaterOn>
+                <ToWater plants={this.state.plants}></ToWater>
             </div>
         );
     }
 }
 
-// Export Home class to use in App.js
-export default ReadWaterPlants;
+// Export ReadToWater class to use in home.js
+export default ReadToWater;

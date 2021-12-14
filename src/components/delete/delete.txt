@@ -1,0 +1,4 @@
+To note
+-------
+
+The delete functionality can be found within read/plants/plantsItem.js

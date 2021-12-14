@@ -1,9 +1,11 @@
+// Imports (React, Component, and Bootstrap element)
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 
-// Class Home - Extends Component class
-class Test extends Component {
+// Class EmptyCollection - Extends Component class
+class EmptyCollection extends Component {
 
+    // Method - Visual content of class
     render() {
        return(
        <div className='noPlants'>
@@ -13,5 +15,5 @@ class Test extends Component {
     }
 }
 
-// Export Home class to use in App.js
-export default Test;
+// Export EmptyCollection class for use in plants.js
+export default EmptyCollection;

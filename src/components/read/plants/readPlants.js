@@ -1,25 +1,26 @@
-// Imports
+// Imports (React, Component, Local Component and Axios)
 import React, { Component } from 'react';
-import MyPlants from './my-plants';
+import Plants from './plants';
 import axios from 'axios';
 
-// Class Read - extends Component class
-class ReadMyPlants extends Component {
+// Class ReadPlants - extends Component class
+class ReadPlants extends Component {
 
-    //Constructor
+    //Constructor - Initialises component
     constructor() {
         // Invoke parent constructor
         super();
 
+        // Bind - Binds function call to specific reference for invoking
         this.reloadData = this.reloadData.bind(this);
     }
 
-    // Method - Reload page after item has been added/deleted
+    // Method - Used to reload the page after plant has been added/deleted
     reloadData() {
         // Retrieve data from the server and...
         axios.get("http://localhost:4000/my-plants")
             .then((response) => {
-                // pass it to the movies array
+                // pass it to the plants array
                 this.setState({ plants: response.data })
             })
             .catch((error) => {
@@ -33,7 +34,7 @@ class ReadMyPlants extends Component {
         // Retrieve data from the server and...
         axios.get("http://localhost:4000/my-plants")
             .then((response) => {
-                // pass it to the movies array
+                // pass it to the plants array
                 this.setState({ plants: response.data })
             })
             .catch((error) => {
@@ -52,13 +53,12 @@ class ReadMyPlants extends Component {
 
         return (
             <div>
-                {/* Displaying and passing data from state object to the Movie component */}
-                <MyPlants plants={this.state.plants} reloadData = {this.reloadData}></MyPlants>
+                {/* Displaying the Plants component, while passing it the plants received and the function to reload */}
+                <Plants plants={this.state.plants} reloadData = {this.reloadData}></Plants>
             </div>
         );
     }
-
 }
 
-// Export component for use elsewhere
-export default ReadMyPlants;
+// Export ReadPlants for use in App.js
+export default ReadPlants;

@@ -1,8 +1,9 @@
-import axios from 'axios';
+// Imports ( React, Component, and Axios)
 import React, { Component } from 'react';
-import '../../styling/addplant.css'
+import axios from 'axios';
 
-// Class Home - Extends Component class
+
+// Class EditPlant - Extends Component class
 class EditPlant extends Component {
 
     // Initialises state initially to empty
@@ -11,13 +12,13 @@ class EditPlant extends Component {
         // Invoke parent constructor (Component)
         super();
 
-         // Bind - When invoked, call local instances
-         this.submit = this.submit.bind(this);
-         this.changeName = this.changeName.bind(this);
-         this.changeType = this.changeType.bind(this);
-         this.changeExposure = this.changeExposure.bind(this);
-         this.changeImage = this.changeImage.bind(this);
-         this.changeDay = this.changeDay.bind(this);
+        // Bind - When invoked, call local instances
+        this.submit = this.submit.bind(this);
+        this.changeName = this.changeName.bind(this);
+        this.changeType = this.changeType.bind(this);
+        this.changeExposure = this.changeExposure.bind(this);
+        this.changeImage = this.changeImage.bind(this);
+        this.changeDay = this.changeDay.bind(this);
 
         // Initialise state to empty 
         this.state = {
@@ -31,29 +32,30 @@ class EditPlant extends Component {
     }
 
     // Called when component is loaded
-    componentDidMount(){
+    componentDidMount() {
 
+        // Makes a GET request to specified url, alongside the specified id
         axios.get('http://localhost:4000/my-plants/' + this.props.match.params.id)
-        .then((response)=> {
-            
-            // Update values of the current state from the retrieved document values
-            this.setState({
-                _id:response.data._id,
-                name:response.data.name,
-                type:response.data.type,
-                exposure:response.data.exposure,
-                image:response.data.image,
-                waterOn:response.data.waterOn
+            .then((response) => {
+
+                // Update values of the current state from the retrieved document values
+                this.setState({
+                    _id: response.data._id,
+                    name: response.data.name,
+                    type: response.data.type,
+                    exposure: response.data.exposure,
+                    image: response.data.image,
+                    waterOn: response.data.waterOn
+                })
             })
-        })
-        .catch((error)=>{console.log(error);})
+            .catch((error) => { console.log(error); })
     }
 
     // Method - Invoked when form has been submitted
     submit(event) {
 
-        // Alert onscreen of insert (test)
-        alert("Updated plant, passing to database " + this.state.name);
+        // Alert onscreen of insert
+        alert("Updated plant: " + this.state.name);
 
         // Prevent page refresh
         event.preventDefault();
@@ -68,38 +70,39 @@ class EditPlant extends Component {
             waterOn: this.state.waterOn
         }
 
-        // Send a POST request to the following path alongside new plant
-        axios.put("http://localhost:4000/my-plants/"+this.state._id, updatedPlant)
-        .then((response)=>{
-            console.log(response)
-        })
-        .catch((error) =>{
-            console.log(error);
-        });
+        // Send a POST request to the following path alongside the id to update and its new values
+        // Log results to console
+        axios.put("http://localhost:4000/my-plants/" + this.state._id, updatedPlant)
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     // Setter methods for new plant values
-    changeName(event){
+    changeName(event) {
         this.setState({
             name: event.target.value
         })
     }
-    changeType(event){
+    changeType(event) {
         this.setState({
             type: event.target.value
         })
     }
-    changeExposure(event){
+    changeExposure(event) {
         this.setState({
             exposure: event.target.value
         })
     }
-    changeImage(event){
+    changeImage(event) {
         this.setState({
             image: event.target.value
         })
     }
-    changeDay(event){
+    changeDay(event) {
         this.setState({
             waterOn: event.target.value
         })
@@ -116,7 +119,7 @@ class EditPlant extends Component {
                         {/* Input box */}
                         <input type="text"
                             className="form-control"
-                            value={this.state.name}
+                            value={this.state.name} // Value of text box points to "name"
                             onChange={this.changeName} //Update name value
                         />
                     </div>
@@ -128,7 +131,7 @@ class EditPlant extends Component {
                         {/* Input box */}
                         <input type="text"
                             className="form-control"
-                            value={this.state.type} // Value of text box points to "Type"
+                            value={this.state.type} // Value of text box points to "type"
                             onChange={this.changeType} //Update type value
                         />
                     </div>
@@ -140,24 +143,25 @@ class EditPlant extends Component {
                         {/* Input box */}
                         <input type="text"
                             className="form-control"
-                            value={this.state.exposure} // Value of text box points to "Exposure"
+                            value={this.state.exposure} // Value of text box points to "exposure"
                             onChange={this.changeExposure} //Update exposure value
                         />
                     </div>
-                     {/* Image */}
-                     <div className="form-group">
+                    {/* Image */}
+                    <div className="form-group">
                         <label>Image: </label>
 
                         {/* Input box */}
                         <input type="text"
                             className="form-control"
-                            value={this.state.image} // Value of text box points to "Image"
+                            value={this.state.image} // Value of text box points to "image"
                             onChange={this.changeImage} //Update image value
                         />
                     </div>
                     <div className="form-group">
-                        <label>Water On: </label><br/>
+                        <label>Water On: </label><br />
 
+                        {/* Gives the option of the days of the week */}
                         <select name="water" id="water" onChange={this.changeDay} value={this.state.waterOn}>
                             <option value="Monday">Monday</option>
                             <option value="Tuesday">Tuesday</option>
@@ -169,10 +173,10 @@ class EditPlant extends Component {
                         </select>
                     </div>
 
-                    
+
                     <div>
                         <br></br>
-                        {/* Button to submit movie */}
+                        {/* Button to submit the updated plant entry */}
                         <input type="submit" value="Update" className="btn btn-success"></input>
                     </div>
                 </form>
@@ -180,5 +184,5 @@ class EditPlant extends Component {
     }
 }
 
-// Export Home class to use in App.js
+// Export EditPlant class to use in App.js
 export default EditPlant;

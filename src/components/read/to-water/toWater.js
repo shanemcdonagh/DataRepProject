@@ -1,13 +1,17 @@
+// Imports (React, Component, and Local Components)
 import React, { Component } from 'react';
-import WaterItem from './water-item';
-import NoWater from '../no-water';
+import WaterItem from './waterItem';
+import NoneToWater from '../../conditions/noneToWater';
 
-// Class Home - Extends Component class
-class WaterOn extends Component {
+// Class ToWater - Extends Component class
+class ToWater extends Component {
 
+    // Method - Visual content of the component
     render() {
         // Props - Used to access information passed from parent component
         // Map - Used to split the array
+
+        // Variable - Used to determine if passed array is empty
         var count = 0;
 
         // Increases count based on amount of plants returned in the array (plants to water)
@@ -18,10 +22,12 @@ class WaterOn extends Component {
 
         // If there are no plants...
         if (count === 0) {
-            return <NoWater></NoWater>
+            // Display the suitable component
+            return <NoneToWater></NoneToWater>
         }
         else {
             return this.props.plants.map((plant) => {
+                // Display the WaterItem component, passing it the plants and their unique identifier
                 return <WaterItem plant={plant} key={plant._id}></WaterItem>;
             });
         }
@@ -29,5 +35,5 @@ class WaterOn extends Component {
     }
 }
 
-// Export Home class to use in App.js
-export default WaterOn;
+// Export ToWater class to use in readToWater.js
+export default ToWater;

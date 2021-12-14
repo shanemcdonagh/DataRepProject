@@ -70,7 +70,13 @@ app.get('/today', (req, res) => {
 
     // Retrieve plants that need watering on this day
     userPlantModel.find({ waterOn: weekday }, (err, data) => {
-        res.status(200).json(data);
+        if (err) {
+            res.status(500).json(err);
+        }
+        else {
+            // Responds to request with JSON data
+            res.status(200).json(data);
+        }
     })
 });
 
@@ -80,11 +86,14 @@ app.get('/collection', (req, res) => {
 
     // Return all documents within this collection (plants) based on defined schemas
     currPlantModel.find((err, data) => {
-        // Responds to request with JSON data
-        res.status(200).json(data);
+        if (err) {
+            res.status(500).json(err);
+        }
+        else {
+            // Responds to request with JSON data
+            res.status(200).json(data);
+        }
     })
-    //.then((data)=>{res.status(200).json(data)})
-    //.catch((err) =>{res.status(500).send('Error: ' + err)})
 });
 
 // Listens for a GET request to the following path
@@ -92,22 +101,32 @@ app.get('/my-plants', (req, res) => {
 
     // Return all documents within this collection (my-plants) based on defined schemas
     userPlantModel.find((err, data) => {
-        // Responds to request with JSON data
-        res.status(200).json(data);
+
+        if (err) {
+            res.status(500).json(err);
+        }
+        else {
+            // Responds to request with JSON data
+            res.status(200).json(data);
+        }
+
     })
-    // .then((data)=>{console.log("Data succesfully retrieved: " + data)})
-    // .catch((err) =>{res.status(500).send('Error: ' + err)})
 });
 
 // Returns record from the database based on its id and sends a JSON response to the client
 app.get('/my-plants/:id', (req, res) => {
-    console.log(req.params.id);
+    console.log("Plant ID: " + req.params.id);
 
     userPlantModel.findById(req.params.id, (err, data) => {
-        res.json(data);
+
+        if (err) {
+            res.status(500).json(err);
+        }
+        else {
+            res.status(200).json(data);
+
+        }
     })
-    //  .then((data)=>{console.log("Data succesfully retrieved: " + data)})
-    //  .catch((err) =>{res.status(500).send('Error: ' + err)})
 })
 
 app.put('/my-plants/:id', (req, res) => {
@@ -118,12 +137,11 @@ app.put('/my-plants/:id', (req, res) => {
         (error, data) => {
             // If an error was encountered
             if (error) {
-                res.status(200).send("Unexpected error: " + error);
+                res.status(500).send("Unexpected error: " + error);
             }
             else {
                 res.status(200).send("Resource successfully updated: " + data);
             }
-
         })
 })
 
@@ -138,10 +156,16 @@ app.post('/my-plants', (req, res) => {
         exposure: req.body.exposure,
         image: req.body.image,
         waterOn: req.body.waterOn,
-    })
-    //.then((data)=>{res.status(201).send('Data successfully sent to the server')})
-    // .catch(res.status(500).send('Error encountered'))
-
+    },
+        (err, data) => {
+            // If an error was encountered
+            if (err) {
+                res.status(500).send("Unexpected error: " + error);
+            }
+            else {
+                res.status(201).send("Resource successfully created: " + data);
+            }
+        })
 })
 
 // Listens for DELETE request passed to this url

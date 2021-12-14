@@ -1,7 +1,7 @@
+// Imports (React, Component, Local Component, and Bootstrap Element)
 import React, { Component } from 'react';
+import ReadToWater from './read/to-water/readToWater';
 import Carousel from 'react-bootstrap/Carousel';
-import ReadWaterPlants from './read/read-water';
-import '../styling/home.css';
 
 // Class Home - Extends Component class
 class Home extends Component {
@@ -10,7 +10,7 @@ class Home extends Component {
     render() {
         return (<div>
             <div className="homeItems">
-                <div>
+                <div className='slideshow'>
                     {/* Bootstrap Carousel - Looping over images */}
                     <Carousel>
                         <Carousel.Item interval={1600}>
@@ -36,9 +36,11 @@ class Home extends Component {
                         </Carousel.Item>
                     </Carousel>
                 </div>
+                {/* Creates a border between both divs through CSS (seen in App.css) */}
                 <div className='borderLine'></div>
+                {/* Displays the component of plants to water */}
                 <div className='waterList'>
-                    <ReadWaterPlants></ReadWaterPlants>
+                    <ReadToWater></ReadToWater>
                 </div>      
             </div>
         </div>);

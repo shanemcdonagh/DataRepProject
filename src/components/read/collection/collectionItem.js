@@ -1,3 +1,4 @@
+// Imports (React, Component, Axios and Bootstrap Elements)
 import React, { Component } from 'react';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
@@ -7,36 +8,46 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
 
-// Class Home - Extends Component class
+// Class CollectionItem - Extends Component class
 class CollectionItem extends Component {
 
+    // Initialises component 
     constructor() {
 
+        // Invokes parent class constructor
         super();
 
+        // Binds - Used to bind function calls to specific references
         this.changeDay = this.changeDay.bind(this);
         this.AddMyPlant = this.AddMyPlant.bind(this);
 
+        // Sets default value to 'Monday'
         this.state = {
             waterOn: 'Monday',
         }
     }
 
+    // Method - Used to send values of selected document to be added to a new collection
     AddMyPlant(plant) {
 
-        alert("Plant added to collection!")
+        // Initialises new instance of a plant to the parameter values
         const myPlant =
         {
             name: plant.name,
             type: plant.type,
             exposure: plant.exposure,
             image: plant.image,
+
+            // Additional field to be added based on user selection
             waterOn: this.state.waterOn
         }
 
-        // Send a POST request to the following path alongside new plant
+        // Sends a POST request to the following path alongside the new plant
+        // Log responses to the console
         axios.post("http://localhost:4000/my-plants", myPlant)
             .then((response) => {
+                // On-screen alert to confirm successfull addition 
+                alert("Plant added to collection!");
                 console.log(response)
             })
             .catch((error) => {
@@ -44,6 +55,7 @@ class CollectionItem extends Component {
             });
     }
 
+    // Setter method used to set state of 'waterOn'
     changeDay(event) {
         this.setState({
             waterOn: event.target.value
@@ -86,6 +98,9 @@ class CollectionItem extends Component {
                             </select>
                         </Col>
                         <Col>
+                            {/* Invokes method to add selected plant to another collection */}
+                            {/* Problem: Initially the function "AddMyPlant" was invoked on render
+                                Solution: https://stackoverflow.com/a/34226188 */}
                             <Button variant="success" onClick={() => { this.AddMyPlant(this.props.plant) }}>Add</Button>
                         </Col>
                     </Row>
@@ -95,5 +110,5 @@ class CollectionItem extends Component {
     }
 }
 
-// Export Home class to use in App.js
+// Export CollectionItem for use in collection.js
 export default CollectionItem;

@@ -1,12 +1,11 @@
+// Imports (React, Component, and Bootstrap elements)
 import React, { Component } from 'react';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import '../../styling/water-item.css';
 
-
-// Class Home - Extends Component class
+// Class WaterItem - Extends Component class
 class WaterItem extends Component {
 
     // Method - This contains the visual content of the component
@@ -40,5 +39,5 @@ class WaterItem extends Component {
     }
 }
 
-// Export WaterItem class to use in App.js
+// Export WaterItem class to use in toWater.js
 export default WaterItem;

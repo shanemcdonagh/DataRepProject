@@ -1,17 +1,18 @@
-import axios from 'axios';
+// Import (React & Axios)
 import React, { Component } from 'react';
-import '../../styling/addplant.css'
+import axios from 'axios';
 
-// Class Home - Extends Component sclass
+
+// Class AddPlant - Extends Component sclass
 class AddPlant extends Component {
 
-    // Initialises state initially to empty
+    // Constructor - Used to initialise component
     constructor() {
 
         // Invoke parent constructor (Component)
         super();
 
-         // Bind - When invoked, call local instances
+         // Bind - Binds function calls to references
          this.submit = this.submit.bind(this);
          this.changeName = this.changeName.bind(this);
          this.changeType = this.changeType.bind(this);
@@ -32,10 +33,10 @@ class AddPlant extends Component {
     // Method - Invoked when form has been submitted
     submit(event) {
 
-        // Alert onscreen of insert (test)
-        alert("Added plant to database " + this.state.name);
+        // Alert onscreen of insert
+        alert("Added plant to database: " + this.state.name);
 
-        // Prevent page refresh
+        // Prevents a page refresh
         event.preventDefault();
 
         // Create new instance of a plant based on values set in form
@@ -47,7 +48,8 @@ class AddPlant extends Component {
             waterOn: this.state.waterOn
         }
 
-        // Send a POST request to the following path alongside new plant
+        // Send a POST request to the following path alongside the new plant
+        // Log results to console
         axios.post("http://localhost:4000/my-plants", newPlant)
         .then((response)=>{
             console.log(response)
@@ -95,8 +97,8 @@ class AddPlant extends Component {
                         {/* Input box */}
                         <input type="text"
                             className="form-control"
-                            value={this.state.name}
-                            onChange={this.changeName} //Update name value
+                            value={this.state.name} // Value of text box points to "name"
+                            onChange={this.changeName} //Updates name value
                         />
                     </div>
 
@@ -107,8 +109,8 @@ class AddPlant extends Component {
                         {/* Input box */}
                         <input type="text"
                             className="form-control"
-                            value={this.state.type} // Value of text box points to "Type"
-                            onChange={this.changeType} //Update type value
+                            value={this.state.type} // Value of text box points to "type"
+                            onChange={this.changeType} //Updates type value
                         />
                     </div>
 
@@ -119,8 +121,8 @@ class AddPlant extends Component {
                         {/* Input box */}
                         <input type="text"
                             className="form-control"
-                            value={this.state.exposure} // Value of text box points to "Exposure"
-                            onChange={this.changeExposure} //Update exposure value
+                            value={this.state.exposure} // Value of text box points to "exposure"
+                            onChange={this.changeExposure} //Updates exposure value
                         />
                     </div>
                      {/* Image */}
@@ -130,13 +132,15 @@ class AddPlant extends Component {
                         {/* Input box */}
                         <input type="text"
                             className="form-control"
-                            value={this.state.image} // Value of text box points to "Image"
-                            onChange={this.changeImage} //Update image value
+                            value={this.state.image} // Value of text box points to "image"
+                            onChange={this.changeImage} //Updates image value
                         />
                     </div>
+                    {/* Water On */}
                     <div className="form-group">
                         <label>Water On: </label><br/>
 
+                        {/* Gives option to choose between days of the week */}
                         <select name="water" id="water" onChange={this.changeDay} value={this.state.waterOn}>
                             <option value="Monday">Monday</option>
                             <option value="Tuesday">Tuesday</option>
@@ -147,11 +151,9 @@ class AddPlant extends Component {
                             <option value="Sunday">Sunday</option>
                         </select>
                     </div>
-
-                    
                     <div>
                         <br></br>
-                        {/* Button to submit movie */}
+                        {/* Button to add the plant to the user collection */}
                         <input type="submit" value="Add Plant" className="btn btn-success"></input>
                     </div>
                 </form>
@@ -159,5 +161,5 @@ class AddPlant extends Component {
     }
 }
 
-// Export Home class to use in App.js
+// Export AddPlant class for use in App.js
 export default AddPlant;

@@ -1,23 +1,22 @@
-// Imports
+// Imports (React, Component, Local Component, and Axios)
 import React, { Component } from 'react';
 import Collection from './collection';
 import axios from 'axios';
 
-// Class Read - extends Component class
-class readCollection extends Component {
+// Class ReadCollection - extends Component class
+class ReadCollection extends Component {
 
-    // Called everytime component becomes active in view
+    // Method - Called everytime component becomes active in view
     componentDidMount() {
         // Promise - Result of an asynchronous operation
         // Axios - Promise based HTTP client
         axios.get('http://localhost:4000/collection')
             .then((response) => {
-                this.setState({ plants: response.data })
+                this.setState({ plants: response.data }) // Set current state to retrieved data
             })
             .catch((error) => {
-                console.log("Bruh");
+                console.log("Cannot retrieve information from server");
             })
-
     }
 
     // Object designed to hold data within a class
@@ -30,7 +29,7 @@ class readCollection extends Component {
 
         return (
             <div>
-                {/* Displaying and passing data from state object to the Movie component */}
+                {/* Displaying and passing data from state object to the Collection component */}
                 <Collection plants={this.state.plants}></Collection>
             </div>
         );
@@ -38,5 +37,5 @@ class readCollection extends Component {
 
 }
 
-// Export component for use elsewhere
-export default readCollection;
+// Export ReadCollection for use in App.js
+export default ReadCollection;
