@@ -73,8 +73,8 @@ class EditPlant extends Component {
         // Send a POST request to the following path alongside the id to update and its new values
         // Log results to console
         axios.put("http://localhost:4000/my-plants/" + this.state._id, updatedPlant)
-            .then((response) => {
-                console.log(response)
+            .then((response) => {   
+                console.log(response);
             })
             .catch((error) => {
                 console.log(error);
